@@ -44,7 +44,7 @@ Made with 💚 by the CozyMantis squad.
 
 ### Pascal Parser
 
-- ascal Person Part is a tiny single person human parsing dataset with 3000+ images. This dataset focus more on body parts segmentation.
+- Pascal Person Part is a tiny single person human parsing dataset with 3000+ images. This dataset focus more on body parts segmentation.
 - mIoU on Pascal-Person-Part validation: 71.46 %
 - The Pascal parser can detect the following categories:
 
