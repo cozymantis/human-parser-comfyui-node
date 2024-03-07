@@ -5,7 +5,6 @@ Made with 💚 by the CozyMantis squad.
 
 | Original              | ATR                      | LIP                      | Pascal                      |
 | --------------------- | ------------------------ | ------------------------ | ------------------------ |
-| ![](assets/demo1.jpg) | ![](assets/demo1atr.png) | ![](assets/demo1lip.png) | ![](assets/demo1pascal.png) |
 | ![](assets/demo2.jpg) | ![](assets/demo2atr.png) | ![](assets/demo2lip.png) | ![](assets/demo2pascal.png) |
 | ![](assets/demo3.jpg) | ![](assets/demo3atr.png) | ![](assets/demo3lip.png) | ![](assets/demo3pascal.png) |
 
