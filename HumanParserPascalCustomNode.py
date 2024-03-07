@@ -23,7 +23,7 @@ class HumanParserPascalCustomNode:
   RETURN_TYPES = ("MASK", "IMAGE")
   RETURN_NAMES = ("mask", "map")
   FUNCTION = "run"
-  CATEGORY = "examples"
+  CATEGORY = "CozyMantis"
 
   def run(self, image, background, head, torso, upper_arms, lower_arms, upper_legs, lower_legs):
     if torch.cuda.is_available():

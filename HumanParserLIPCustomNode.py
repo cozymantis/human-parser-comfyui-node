@@ -36,7 +36,7 @@ class HumanParserLIPCustomNode:
   RETURN_TYPES = ("MASK", "IMAGE")
   RETURN_NAMES = ("mask", "map")
   FUNCTION = "run"
-  CATEGORY = "examples"
+  CATEGORY = "CozyMantis"
 
   def run(self, image, background, hat, hair, glove, sunglasses, upper_clothes, dress, coat, socks, pants, jumpsuits, scarf, skirt, face, left_arm, right_arm, left_leg, right_leg, left_shoe, right_shoe):
     if torch.cuda.is_available():

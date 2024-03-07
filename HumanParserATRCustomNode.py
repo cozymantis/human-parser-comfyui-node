@@ -34,7 +34,7 @@ class HumanParserATRCustomNode:
   RETURN_TYPES = ("MASK", "IMAGE")
   RETURN_NAMES = ("mask", "map")
   FUNCTION = "run"
-  CATEGORY = "examples"
+  CATEGORY = "CozyMantis"
 
   def run(self, image, background, hat, hair, sunglasses, upper_clothes, skirt, pants, dress, belt, left_shoe, right_shoe, face, left_leg, right_leg, left_arm, right_arm, bag, scarf):
     if torch.cuda.is_available():
