@@ -20,7 +20,7 @@ Made with 💚 by the [CozyMantis](https://cozymantis.gumroad.com/) squad.
 
 ### LIP Parser
 
-- LIP is the largest single person human parsing dataset with 50000+ images. This dataset focus more on the complicated real scenarios.
+- LIP is the largest single person human parsing dataset with 50000+ images. This dataset focuses on complicated real scenarios.
 - mIoU on LIP validation: 59.36 %
 - The LIP parser can detect the following categories:
 
@@ -32,7 +32,7 @@ Made with 💚 by the [CozyMantis](https://cozymantis.gumroad.com/) squad.
 
 ### ATR Parser
 
-- ATR is a large single person human parsing dataset with 17000+ images. This dataset focus more on fashion AI.
+- ATR is a large single person human parsing dataset with 17000+ images. This dataset focuses on fashion AI.
 - mIoU on ATR test: 82.29%
 - The ATR parser can detect the following categories:
 
@@ -44,7 +44,7 @@ Made with 💚 by the [CozyMantis](https://cozymantis.gumroad.com/) squad.
 
 ### Pascal Parser
 
-- Pascal Person Part is a tiny single person human parsing dataset with 3000+ images. This dataset focus more on body parts segmentation.
+- Pascal Person Part is a tiny single person human parsing dataset with 3000+ images. This dataset focuses on body parts segmentation.
 - mIoU on Pascal-Person-Part validation: 71.46 %
 - The Pascal parser can detect the following categories:
 
