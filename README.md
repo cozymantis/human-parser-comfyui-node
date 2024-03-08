@@ -1,7 +1,7 @@
 # Cozy Human Parser
 
 Fast, VRAM-light ComfyUI nodes to generate masks for specific body parts and clothes or fashion items. Runs on CPU and CUDA.
-Made with 💚 by the CozyMantis squad.
+Made with 💚 by the [CozyMantis](https://cozymantis.gumroad.com/) squad.
 
 | Original              | ATR                      | LIP                      | Pascal                      |
 | --------------------- | ------------------------ | ------------------------ | ------------------------ |
