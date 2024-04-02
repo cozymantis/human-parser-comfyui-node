@@ -68,6 +68,12 @@ The solution is to:
   - see https://www.mathworks.com/matlabcentral/answers/94933-how-do-i-edit-my-system-path-in-windows
   - remember, you need to enter the path to the folder containing the ninja.exe binary)
   - see [this issue](https://github.com/cozymantis/human-parser-comfyui-node/issues/3) for more details
+
+- ### NK1104: cannot open file 'python311.lib' (or similar)
+
+Windows can't locate the `python311.lib` library. You need to search for it on your system, then add the library's parent directory to the "LIB" environment variable.
+- see [this SO article](https://stackoverflow.com/questions/36419747/link-fatal-error-lnk1104-cannot-open-file-python27-lib)
+- also see [this issue](https://github.com/cozymantis/human-parser-comfyui-node/issues/1)
  
 - ### Command '['where', 'cl']' returned non-zero exit status 1
 
