@@ -54,6 +54,44 @@ Made with 💚 by the [CozyMantis](https://cozymantis.gumroad.com/) squad.
 
 ![assets/pascalexample.png](assets/pascalexample.png)
 
+## Windows Troubleshooting
+
+### Ninja is required to load C++ extensions
+
+Windows can't find the "ninja.exe" file. The file is probably getting downloaded/installed to something like `X:\path\to\comfy\python_embeded\lib\site-packages\ninja\data\bin`, but it's not properly getting added to the system path, so the OS can't invoke it.
+
+The solution is to:
+- locate the "ninja.exe" file;
+- add the full path to ninja.exe into the system PATH:
+  - see https://www.mathworks.com/matlabcentral/answers/94933-how-do-i-edit-my-system-path-in-windows
+  - remember, you need to enter the path to the folder containing the ninja.exe binary)
+  - see [this issue](https://github.com/cozymantis/human-parser-comfyui-node/issues/3) for more details
+ 
+### Command '['where', 'cl']' returned non-zero exit status 1
+
+Windows can't locate "cl.exe" which is the compiler/linker tool: https://learn.microsoft.com/en-us/cpp/build/reference/compiler-options?view=msvc-170
+
+> You can start this tool only from a Visual Studio developer command prompt. You cannot start it from a system command prompt or from File Explorer. For more information, see Use the MSVC toolset from the command line.
+
+First, make sure you've installed all of the things highlighted below:
+
+![image](https://github.com/cozymantis/human-parser-comfyui-node/assets/5381731/76fbff32-be60-4120-a682-4fa7588e9bf4)
+
+Then, it looks like you'll need to start ComfyUI from the developer command prompt instead of the regular cmd. Here's docs on how to launch the dev command prompt: https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022
+
+You'll want to run something similar to:
+
+```bash
+cd X:\path\to\comfy
+python main.py
+```
+
+### error: first parameter of allocation function must be of type "size_t"
+
+Make sure you're running the "x64 Native Tools Command Prompt" instead of the x86 one. Type "x64" in the start menu to locate it.
+
+![image](https://github.com/cozymantis/human-parser-comfyui-node/assets/5381731/120f5a1b-adf3-4fb1-a3df-5c0006ce0a6e)
+
 ## Acknowledgements
 
 Based on the excellent paper ["Self-Correction for Human Parsing"](https://github.com/GoGoDuck912/Self-Correction-Human-Parsing) by Li, Peike and Xu, Yunqiu and Wei, Yunchao and Yang, Yi, and their original code that we've updated to also run on CPUs.
