@@ -15,6 +15,8 @@ Made with 💚 by the [CozyMantis](https://cozymantis.gumroad.com/) squad.
   - Model based on the LIP dataset: [Google Drive](https://drive.google.com/file/d/1k4dllHpu0bdx38J7H28rVVLpU-kOHmnH/view?usp=sharing)
   - Model based on the ATR dataset: [Google Drive](https://drive.google.com/file/d/1ruJg4lqR_jgQPj-9K0PP-L2vJERYOxLP/view?usp=sharing)
   - Model based on the Pascal dataset: [Google Drive](https://drive.google.com/file/d/1E5YwNKW2VOEayK9mWCS3Kpsxf-3z04ZE/view?usp=sharing)
+ 
+Check below for [Windows troubleshooting](#windows-troubleshooting).
 
 ## Examples
 
@@ -56,7 +58,7 @@ Made with 💚 by the [CozyMantis](https://cozymantis.gumroad.com/) squad.
 
 ## Windows Troubleshooting
 
-### Ninja is required to load C++ extensions
+- ### Ninja is required to load C++ extensions
 
 Windows can't find the "ninja.exe" file. The file is probably getting downloaded/installed to something like `X:\path\to\comfy\python_embeded\lib\site-packages\ninja\data\bin`, but it's not properly getting added to the system path, so the OS can't invoke it.
 
@@ -67,7 +69,7 @@ The solution is to:
   - remember, you need to enter the path to the folder containing the ninja.exe binary)
   - see [this issue](https://github.com/cozymantis/human-parser-comfyui-node/issues/3) for more details
  
-### Command '['where', 'cl']' returned non-zero exit status 1
+- ### Command '['where', 'cl']' returned non-zero exit status 1
 
 Windows can't locate "cl.exe" which is the compiler/linker tool: https://learn.microsoft.com/en-us/cpp/build/reference/compiler-options?view=msvc-170
 
@@ -86,7 +88,7 @@ cd X:\path\to\comfy
 python main.py
 ```
 
-### error: first parameter of allocation function must be of type "size_t"
+- ### error: first parameter of allocation function must be of type "size_t"
 
 Make sure you're running the "x64 Native Tools Command Prompt" instead of the x86 one. Type "x64" in the start menu to locate it.
 
