@@ -10,6 +10,6 @@ Repository = "https://github.com/cozymantis/human-parser-comfyui-node"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
-PublisherId = ""
-DisplayName = "human-parser-comfyui-node"
+PublisherId = "cozymantis"
+DisplayName = "Human Body and Clothes Parser - Segmentation ComfyUI Node"
 Icon = ""
