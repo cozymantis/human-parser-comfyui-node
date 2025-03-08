@@ -2,7 +2,7 @@
 name = "human-parser-comfyui-node"
 description = "A ComfyUI node to automatically extract masks for body regions and clothing/fashion items. Made with 💚 by the CozyMantis squad."
 version = "1.0.0"
-license = "LICENSE"
+license = { file = "LICENSE.md" }
 dependencies = ["ninja", "torch", "opencv-python", "numpy"]
 
 [project.urls]
