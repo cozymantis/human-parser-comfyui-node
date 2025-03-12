@@ -67,6 +67,14 @@ def _xywh2cs(x, y, w, h, aspect_ratio):
     scale = np.array([w, h], dtype=np.float32)
     return center, scale
 
+def check_model_path(model_path):
+    # Checks to see if the model exists, if not try adding ComfyUI/ to the start to fix possible errors on Windows (maybe others too)
+    if not os.path.exists(model_path):
+        new_model_path = os.path.join("ComfyUI", model_path)
+        if os.path.exists(new_model_path):
+            return new_model_path
+    return model_path
+
 def generate(image, type, device):
   num_classes = dataset_settings[type]['num_classes']
   input_size = dataset_settings[type]['input_size']
@@ -77,6 +85,9 @@ def generate(image, type, device):
     model_path = 'models/schp/exp-schp-201908301523-atr.pth'
   elif type == 'pascal':
     model_path = 'models/schp/exp-schp-201908270938-pascal-person-part.pth'
+
+  # Check and adjust the model path if necessary
+  model_path = check_model_path(model_path)
 
   model = networks.init_model('resnet101', num_classes=num_classes, pretrained=None)
   state_dict = torch.load(model_path)['state_dict']
