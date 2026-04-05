@@ -89,11 +89,11 @@ std::vector<at::Tensor> mean_var_cuda(at::Tensor x) {
   dim3 blocks(chn);
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
-  AT_DISPATCH_FLOATING_TYPES(x.type(), "mean_var_cuda", ([&] {
+  AT_DISPATCH_FLOATING_TYPES(x.scalar_type(), "mean_var_cuda", ([&] {
     mean_var_kernel<scalar_t><<<blocks, threads, 0, stream>>>(
-        x.data<scalar_t>(),
-        mean.data<scalar_t>(),
-        var.data<scalar_t>(),
+        x.data_ptr<scalar_t>(),
+        mean.data_ptr<scalar_t>(),
+        var.data_ptr<scalar_t>(),
         num, chn, sp);
   }));
 
@@ -142,13 +142,13 @@ at::Tensor forward_cuda(at::Tensor x, at::Tensor mean, at::Tensor var, at::Tenso
   dim3 blocks(chn);
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
-  AT_DISPATCH_FLOATING_TYPES(x.type(), "forward_cuda", ([&] {
+  AT_DISPATCH_FLOATING_TYPES(x.scalar_type(), "forward_cuda", ([&] {
     forward_kernel<scalar_t><<<blocks, threads, 0, stream>>>(
-        x.data<scalar_t>(),
-        mean.data<scalar_t>(),
-        var.data<scalar_t>(),
-        weight.data<scalar_t>(),
-        bias.data<scalar_t>(),
+        x.data_ptr<scalar_t>(),
+        mean.data_ptr<scalar_t>(),
+        var.data_ptr<scalar_t>(),
+        weight.data_ptr<scalar_t>(),
+        bias.data_ptr<scalar_t>(),
         affine, eps, num, chn, sp);
   }));
 
@@ -194,14 +194,14 @@ std::vector<at::Tensor> edz_eydz_cuda(at::Tensor z, at::Tensor dz, at::Tensor we
   dim3 blocks(chn);
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
-  AT_DISPATCH_FLOATING_TYPES(z.type(), "edz_eydz_cuda", ([&] {
+  AT_DISPATCH_FLOATING_TYPES(z.scalar_type(), "edz_eydz_cuda", ([&] {
     edz_eydz_kernel<scalar_t><<<blocks, threads, 0, stream>>>(
-        z.data<scalar_t>(),
-        dz.data<scalar_t>(),
-        weight.data<scalar_t>(),
-        bias.data<scalar_t>(),
-        edz.data<scalar_t>(),
-        eydz.data<scalar_t>(),
+        z.data_ptr<scalar_t>(),
+        dz.data_ptr<scalar_t>(),
+        weight.data_ptr<scalar_t>(),
+        bias.data_ptr<scalar_t>(),
+        edz.data_ptr<scalar_t>(),
+        eydz.data_ptr<scalar_t>(),
         affine, eps, num, chn, sp);
   }));
 
@@ -256,16 +256,16 @@ at::Tensor backward_cuda(at::Tensor z, at::Tensor dz, at::Tensor var, at::Tensor
   dim3 blocks(chn);
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
-  AT_DISPATCH_FLOATING_TYPES(z.type(), "backward_cuda", ([&] {
+  AT_DISPATCH_FLOATING_TYPES(z.scalar_type(), "backward_cuda", ([&] {
     backward_kernel<scalar_t><<<blocks, threads, 0, stream>>>(
-        z.data<scalar_t>(),
-        dz.data<scalar_t>(),
-        var.data<scalar_t>(),
-        weight.data<scalar_t>(),
-        bias.data<scalar_t>(),
-        edz.data<scalar_t>(),
-        eydz.data<scalar_t>(),
-        dx.data<scalar_t>(),
+        z.data_ptr<scalar_t>(),
+        dz.data_ptr<scalar_t>(),
+        var.data_ptr<scalar_t>(),
+        weight.data_ptr<scalar_t>(),
+        bias.data_ptr<scalar_t>(),
+        edz.data_ptr<scalar_t>(),
+        eydz.data_ptr<scalar_t>(),
+        dx.data_ptr<scalar_t>(),
         affine, eps, num, chn, sp);
   }));
 
@@ -299,8 +299,8 @@ void leaky_relu_backward_cuda(at::Tensor z, at::Tensor dz, float slope) {
 
   int64_t count = z.numel();
 
-  AT_DISPATCH_FLOATING_TYPES(z.type(), "leaky_relu_backward_cuda", ([&] {
-    leaky_relu_backward_impl<scalar_t>(z.data<scalar_t>(), dz.data<scalar_t>(), slope, count);
+  AT_DISPATCH_FLOATING_TYPES(z.scalar_type(), "leaky_relu_backward_cuda", ([&] {
+    leaky_relu_backward_impl<scalar_t>(z.data_ptr<scalar_t>(), dz.data_ptr<scalar_t>(), slope, count);
   }));
 }
 
@@ -327,7 +327,7 @@ void elu_backward_cuda(at::Tensor z, at::Tensor dz) {
 
   int64_t count = z.numel();
 
-  AT_DISPATCH_FLOATING_TYPES(z.type(), "leaky_relu_backward_cuda", ([&] {
-    elu_backward_impl<scalar_t>(z.data<scalar_t>(), dz.data<scalar_t>(), count);
+  AT_DISPATCH_FLOATING_TYPES(z.scalar_type(), "elu_backward_cuda", ([&] {
+    elu_backward_impl<scalar_t>(z.data_ptr<scalar_t>(), dz.data_ptr<scalar_t>(), count);
   }));
 }

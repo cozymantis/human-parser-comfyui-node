@@ -8,7 +8,7 @@ std::vector<at::Tensor> mean_var(at::Tensor x)
 {
   if (x.is_cuda())
   {
-    if (x.type().scalarType() == at::ScalarType::Half)
+    if (x.scalar_type() == at::ScalarType::Half)
     {
       return mean_var_cuda_h(x);
     }
@@ -46,7 +46,7 @@ at::Tensor forward(at::Tensor x, at::Tensor mean, at::Tensor var, at::Tensor wei
 {
   if (x.is_cuda())
   {
-    if (x.type().scalarType() == at::ScalarType::Half)
+    if (x.scalar_type() == at::ScalarType::Half)
     {
       return forward_cuda_h(x, mean, var, weight, bias, affine, eps);
     }
@@ -66,7 +66,7 @@ std::vector<at::Tensor> edz_eydz(at::Tensor z, at::Tensor dz, at::Tensor weight,
 {
   if (z.is_cuda())
   {
-    if (z.type().scalarType() == at::ScalarType::Half)
+    if (z.scalar_type() == at::ScalarType::Half)
     {
       return edz_eydz_cuda_h(z, dz, weight, bias, affine, eps);
     }
@@ -86,7 +86,7 @@ at::Tensor backward(at::Tensor z, at::Tensor dz, at::Tensor var, at::Tensor weig
 {
   if (z.is_cuda())
   {
-    if (z.type().scalarType() == at::ScalarType::Half)
+    if (z.scalar_type() == at::ScalarType::Half)
     {
       return backward_cuda_h(z, dz, var, weight, bias, edz, eydz, affine, eps);
     }
@@ -110,7 +110,7 @@ void leaky_relu_backward(at::Tensor z, at::Tensor dz, float slope)
 {
   if (z.is_cuda())
   {
-    if (z.type().scalarType() == at::ScalarType::Half)
+    if (z.scalar_type() == at::ScalarType::Half)
     {
       return leaky_relu_backward_cuda_h(z, dz, slope);
     }
