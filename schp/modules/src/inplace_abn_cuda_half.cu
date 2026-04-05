@@ -85,9 +85,9 @@ std::vector<at::Tensor> mean_var_cuda_h(at::Tensor x) {
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
   mean_var_kernel_h<<<blocks, threads, 0, stream>>>(
-      reinterpret_cast<half*>(x.data<at::Half>()),
-      mean.data<float>(),
-      var.data<float>(),
+      reinterpret_cast<half*>(x.data_ptr<at::Half>()),
+      mean.data_ptr<float>(),
+      var.data_ptr<float>(),
       num, chn, sp);
 
   return {mean, var};
@@ -136,11 +136,11 @@ at::Tensor forward_cuda_h(at::Tensor x, at::Tensor mean, at::Tensor var, at::Ten
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
   forward_kernel_h<<<blocks, threads, 0, stream>>>(
-      reinterpret_cast<half*>(x.data<at::Half>()),
-      mean.data<float>(),
-      var.data<float>(),
-      weight.data<float>(),
-      bias.data<float>(),
+      reinterpret_cast<half*>(x.data_ptr<at::Half>()),
+      mean.data_ptr<float>(),
+      var.data_ptr<float>(),
+      weight.data_ptr<float>(),
+      bias.data_ptr<float>(),
       affine, eps, num, chn, sp);
 
   return x;
@@ -181,12 +181,12 @@ std::vector<at::Tensor> edz_eydz_cuda_h(at::Tensor z, at::Tensor dz, at::Tensor 
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
   edz_eydz_kernel_h<<<blocks, threads, 0, stream>>>(
-        reinterpret_cast<half*>(z.data<at::Half>()),
-        reinterpret_cast<half*>(dz.data<at::Half>()),
-        weight.data<float>(),
-        bias.data<float>(),
-        edz.data<float>(),
-        eydz.data<float>(),
+        reinterpret_cast<half*>(z.data_ptr<at::Half>()),
+        reinterpret_cast<half*>(dz.data_ptr<at::Half>()),
+        weight.data_ptr<float>(),
+        bias.data_ptr<float>(),
+        edz.data_ptr<float>(),
+        eydz.data_ptr<float>(),
         affine, eps, num, chn, sp);
  
   return {edz, eydz};
@@ -236,14 +236,14 @@ at::Tensor backward_cuda_h(at::Tensor z, at::Tensor dz, at::Tensor var, at::Tens
   dim3 threads(getNumThreads(sp));
   auto stream = at::cuda::getCurrentCUDAStream();
   backward_kernel_h<<<blocks, threads, 0, stream>>>(
-        reinterpret_cast<half*>(z.data<at::Half>()),
-        reinterpret_cast<half*>(dz.data<at::Half>()),
-        var.data<float>(),
-        weight.data<float>(),
-        bias.data<float>(),
-        edz.data<float>(),
-        eydz.data<float>(),
-        reinterpret_cast<half*>(dx.data<at::Half>()),
+        reinterpret_cast<half*>(z.data_ptr<at::Half>()),
+        reinterpret_cast<half*>(dz.data_ptr<at::Half>()),
+        var.data_ptr<float>(),
+        weight.data_ptr<float>(),
+        bias.data_ptr<float>(),
+        edz.data_ptr<float>(),
+        eydz.data_ptr<float>(),
+        reinterpret_cast<half*>(dx.data_ptr<at::Half>()),
         affine, eps, num, chn, sp);
 
   return dx;
@@ -268,8 +268,8 @@ void leaky_relu_backward_cuda_h(at::Tensor z, at::Tensor dz, float slope) {
   dim3 blocks = (count + threads.x - 1) / threads.x;
   auto stream = at::cuda::getCurrentCUDAStream();
   leaky_relu_backward_impl_h<<<blocks, threads, 0, stream>>>(
-      reinterpret_cast<half*>(z.data<at::Half>()),
-      reinterpret_cast<half*>(dz.data<at::Half>()),
+      reinterpret_cast<half*>(z.data_ptr<at::Half>()),
+      reinterpret_cast<half*>(dz.data_ptr<at::Half>()),
       slope, count);
 }
 
