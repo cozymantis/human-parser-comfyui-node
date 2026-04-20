@@ -31,10 +31,8 @@ class HumanParserPascalCustomNode:
     else:
         device = 'cpu'
 
-    output_img = generate(image[0], 'pascal', device)
-
+    # Build mask components list
     mask_components = []
-
     if background:
       mask_components.append(0)
     if head:
@@ -50,11 +48,23 @@ class HumanParserPascalCustomNode:
     if lower_legs:
       mask_components.append(6)
 
-    mask = np.isin(output_img, mask_components).astype(np.uint8)
-    mask_image = Image.fromarray(mask * 255)
-    mask_image = mask_image.convert("RGB")
-    mask_image = torch.from_numpy(np.array(mask_image).astype(np.float32) / 255.0).unsqueeze(0)
+    # Process each image in the batch
+    ret_masks = []
+    ret_maps = []
 
-    output_img = output_img.convert('RGB')
-    output_img = torch.from_numpy(np.array(output_img).astype(np.float32) / 255.0).unsqueeze(0)
-    return (mask_image[:, :, :, 0], output_img,)
+    for index in range(len(image)):
+      img = image[index]
+      output_img = generate(img, 'pascal', device)
+
+      mask = np.isin(output_img, mask_components).astype(np.uint8)
+      mask_image = Image.fromarray(mask * 255)
+      mask_image = mask_image.convert("RGB")
+      mask_image = torch.from_numpy(np.array(mask_image).astype(np.float32) / 255.0).unsqueeze(0)
+
+      output_img = output_img.convert('RGB')
+      output_img = torch.from_numpy(np.array(output_img).astype(np.float32) / 255.0).unsqueeze(0)
+
+      ret_masks.append(mask_image[:, :, :, 0])
+      ret_maps.append(output_img)
+
+    return (torch.cat(ret_masks, dim=0), torch.cat(ret_maps, dim=0))
